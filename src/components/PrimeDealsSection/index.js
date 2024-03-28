@@ -4,20 +4,24 @@ import Loader from 'react-loader-spinner'
 
 import ProductCard from '../ProductCard'
 import './index.css'
+
 const apiStatusConstants = {
-    initial: 'INITIAL',
-    success: 'SUCCESS',
-    failure: 'FAILURE',
-    inProgress: 'IN_PROGRESS',
-  }
-  class PrimeDealsSection extends Component{
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
+class PrimeDealsSection extends Component {
   state = {
     primeDeals: [],
     apiStatus: apiStatusConstants.initial,
   }
+
   componentDidMount() {
     this.getPrimeDeals()
   }
+
   getPrimeDeals = async () => {
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
@@ -54,9 +58,9 @@ const apiStatusConstants = {
       })
     }
   }
-  renderPrimeDealsList = () => {
-    const {primeDeals} = this.state
 
+  renderPrimeDealsListView = () => {
+    const {primeDeals} = this.state
     return (
       <div>
         <h1 className="primedeals-list-heading">Exclusive Prime Deals</h1>
@@ -68,23 +72,26 @@ const apiStatusConstants = {
       </div>
     )
   }
+
   renderPrimeDealsFailureView = () => (
     <img
       src="https://assets.ccbp.in/frontend/react-js/exclusive-deals-banner-img.png"
-      alt="register prime"
-      className="register-prime-img"
+      alt="Register Prime"
+      className="register-prime-image"
     />
   )
+
   renderLoadingView = () => (
     <div className="primedeals-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
+
   render() {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderPrimeDealsList()
+        return this.renderPrimeDealsListView()
       case apiStatusConstants.failure:
         return this.renderPrimeDealsFailureView()
       case apiStatusConstants.inProgress:
@@ -94,4 +101,5 @@ const apiStatusConstants = {
     }
   }
 }
+
 export default PrimeDealsSection
